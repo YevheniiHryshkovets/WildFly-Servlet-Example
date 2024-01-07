@@ -29,6 +29,7 @@ agent any
         stage('Deploy') {
             // deploy
             steps {
+                sh 'whoami'
                 sh 'ls -ltrah /var/lib/jenkins/workspace/wildFlyDemo/BuildServerExample/target/.'
                 sh 'scp -i /home/jenkins/.ssh/from_jenkins_to_wildfly_key /var/lib/jenkins/workspace/wildFlyDemo/BuildServerExample/target/devops-1.0-SNAPSHOT.war wildfly@54.196.154.62:/opt/wildfly/standalone/deployments/'
             }
