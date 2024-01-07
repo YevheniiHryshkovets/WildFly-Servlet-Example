@@ -8,8 +8,6 @@ agent any
     stages {
         stage('Checkout') {
             steps {
-                // Clear Workspace
-                cleanWs()
                 
                 // Get some code from a GitHub repository
                 git branch: 'main', url: 'https://github.com/XadmaX/WildFly-Servlet-Example.git'
@@ -41,10 +39,14 @@ agent any
             // failed, record the test results and archive the jar file.
         success {
             echo "-----SUCCESS-----"
+            // Clear Workspace
+            cleanWs()
         }
 
         failure {
             echo "-----FAIL-----"
+            // Clear Workspace
+            cleanWs()
         }
     }
 }
