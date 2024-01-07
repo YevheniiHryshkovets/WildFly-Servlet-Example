@@ -21,6 +21,7 @@ pipeline {
                 // Get some code from a GitHub repository
                 git branch: 'main', url: 'https://github.com/XadmaX/WildFly-Servlet-Example.git'
             }
+        }
 
         stage('Build') {
             steps {
@@ -41,19 +42,17 @@ pipeline {
                 }
             }
         }
-
-        post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-            success {
-                echo "-----SUCCESS-----"
-            }
-
-            failed {
-                echo "-----FAIL-----"
-            }
+    }
+    
+    post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+        success {
+            echo "-----SUCCESS-----"
         }
 
+        failed {
+            echo "-----FAIL-----"
         }
     }
 }
