@@ -1,11 +1,6 @@
 pipeline {
-    agent {
-    //   label {
-    //     label 'ubuntu-slave'
-    //     retries 10
-    //   }
+
     any agent
-    }
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
@@ -26,7 +21,6 @@ pipeline {
         stage('Build') {
             steps {
                 // Run Maven on a Unix agent.
-                sh "mvn clean package"
                 sh "mvn clean install"
 
                 sh 'ls -ltrah target/.'
@@ -47,11 +41,11 @@ pipeline {
     post {
             // If Maven was able to run the tests, even if some of the test
             // failed, record the test results and archive the jar file.
-        success {
+        success: {
             echo "-----SUCCESS-----"
         }
 
-        failure {
+        failure: {
             echo "-----FAIL-----"
         }
     }
